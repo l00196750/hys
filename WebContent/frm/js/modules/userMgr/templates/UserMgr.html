@@ -1,0 +1,42 @@
+<div id="user-mgr-container" class="block">
+	<div id="user-mgr-toolbar" class="search-bar">
+		<div class="col-md-4">
+			<div class="input-group search-group pull-left" style="width:320px">
+	            <span class="input-group-btn">
+	                <button type="button" class="btn btn-default" data-toggle="dropdown" id="user-mgr-search-type-code" name="USER_CODE">
+	                    <span id="user-mgr-search-type-name">编码</span>
+	                    <span class="caret"></span>
+	                </button>
+	                <ul class="dropdown-menu" id="user-mgr-search-type-list" role="menu">
+	                    <li><a name="USER_CODE">编码</a></li>
+	                    <li><a name="USER_NAME">姓名</a></li>
+	                    <li><a name="PHONE">联系电话</a></li>
+	                    <li><a name="EMAIL">邮箱</a>
+	                </li></ul>
+	            </span>
+	            <div class="input-group" style="width:100%">
+	                <input type="text" id="user-mgr-search-input" class="form-control" data-ui-role="clearinput"><span style="cursor: pointer; display: none; pointer-events: auto;" class="form-control-feedback form-clear-input">×</span>
+	            </div>
+	            <div class="input-group-btn">
+	                <button id="user-mgr-btn-search" class="btn btn-default" title="查询">
+	                    查询
+	                </button>
+	                <button id="user-mgr-btn-reset" class="btn btn-default" title="重置">
+	                    重置
+	                </button>
+	            </div>
+	        </div>
+		</div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="btn-group pull-right">
+				<button id="user-mgr-btn-add" type="button" class="btn btn-default">添加</button>
+				<button id="user-mgr-btn-modify" type="button" class="btn btn-default">修改</button>
+				<button id="user-mgr-btn-delete" type="button" class="btn btn-default">删除</button>
+			</div>
+		</div>
+	</div>
+	<div id="user-mgr-grid-container">
+		<div id="user-mgr-grid"></div>
+	</div>
+</div>
