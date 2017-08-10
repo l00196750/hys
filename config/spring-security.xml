@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd 
+ http://www.springframework.org/schema/security 
+ http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- <security:http pattern="/js/**" security="none" /> -->
+    <!-- <security:http pattern="/resources/**" security="none" /> -->
+    <!-- <security:http pattern="/css/**" security="none" /> -->
+    <!-- <security:http pattern="/images/**" security="none" /> -->
+    <!-- <security:http pattern="/*.html" security="none" /> -->
+    <!-- <security:http pattern="/auth/**" security="none" /> -->
+
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/api/**" access="authenticated" />
+
+        <security:form-login login-page="/index.html" username-parameter="username"
+            password-parameter="password" authentication-success-handler-ref="loginSuccessHandler"
+            authentication-failure-handler-ref="loginFailureHandler" />
+        <security:logout logout-success-url="/index.html" />
+        <security:csrf disabled="true" />
+    </security:http>
+
+    <bean id="securityProvider" class="com.hys.login.domain.SecurityProvider" />
+    <bean id="loginFailureHandler" class="com.hys.login.domain.LoginFailureHandler" />
+    <bean id="loginSuccessHandler" class="com.hys.login.domain.LoginSuccessHandler" />
+
+    <security:authentication-manager>
+        <security:authentication-provider ref="securityProvider">
+        </security:authentication-provider>
+    </security:authentication-manager>
+</beans>

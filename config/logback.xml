@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration scan="false" scanPeriod="30 seconds" debug="false">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}- %msg%n</pattern>
+            <!-- <pattern>%msg%n</pattern> -->
+        </encoder>
+    </appender>
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd.HHmmss" />
+    <timestamp key="byDay" datePattern="yyyyMMdd" />
+    <appender name="BUSI_LOG" class="ch.qos.logback.core.FileAppender">
+        <File>logs/${byDay}/cvbs.${bySecond}.log</File>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}- %msg%n</Pattern>
+            <!-- <Pattern>%msg%n</Pattern> -->
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="BUSI_LOG" />
+    </root>
+    <logger name="com.hys" level="debug" additivity="true">
+        <appender-ref ref="BUSI_LOG" />
+    </logger>
+
+    <logger name="org.springframework.beans" level="info" />
+    <logger name="org.springframework.core" level="info" />
+    <logger name="org.springframework.web" level="info" />
+    <logger name="org.springframework.context" level="info" />
+    <logger name="org.springframework.jndi" level="info" />
+    <logger name="org.springframework.aop" level="info" />
+    <logger name="org.springframework.security" level="info" />
+    <logger name="org.springframework.transaction" level="info" />
+    <logger name="org.springframework.jdbc" level="info" />
+    <logger name="org.springframework.test" level="info" />
+    <logger name="org.mybatis.spring" level="info" />
+    <logger name="com.alibaba.druid" level="info" />
+    <logger name="org.hibernate.validator" level="info" />
+
+</configuration>
