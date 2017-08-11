@@ -53,6 +53,16 @@
                 </dependencies>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>
