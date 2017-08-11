@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hys.timetable.dao.StudentMapper">
-    <select id="listStudent" parameterType="string" resultType="com.hys.timetable.model.Student">
-        SELECT S.USER_CODE, U.USER_NAME, S.COURSE_TEACHER_ID
-        FROM TS_STUDENT S, TS_USER U
-        WHERE S.USER_CODE = U.USER_CODE AND S.RECRUIT_PLAN_CODE = #{recruitPlanCode}
-    </select>
-</mapper>
