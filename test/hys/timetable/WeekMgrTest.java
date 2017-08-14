@@ -6,9 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.junit.Ignore;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.Test;
 
 import com.hys.common.utils.Loggers;
 import com.hys.timetable.domain.WeekMgr;
@@ -29,7 +28,6 @@ public class WeekMgrTest extends BaseSpringTest {
     }
 
     @Test
-    @Ignore
     public void getWeekId() {
         weekMgr.loadWeek(201701L, 201710L);
         Set<Long> weekId = weekMgr.getWeekId(201701L, 201701L);
@@ -37,7 +35,6 @@ public class WeekMgrTest extends BaseSpringTest {
     }
 
     @Test
-    @Ignore
     public void t1() {
         TreeMap<Integer, String> studentDuration = new TreeMap<Integer, String>((o1, o2) -> o2.compareTo(o1));
         studentDuration.put(1, "t1");

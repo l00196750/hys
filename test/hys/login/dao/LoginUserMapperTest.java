@@ -2,8 +2,8 @@ package hys.login.dao;
 
 import hys.BaseSpringTest;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.Test;
 
 import com.google.common.base.Preconditions;
 

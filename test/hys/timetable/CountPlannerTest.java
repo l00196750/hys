@@ -1,6 +1,6 @@
 package hys.timetable;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.google.common.collect.Multiset;
 import com.google.common.primitives.Ints;

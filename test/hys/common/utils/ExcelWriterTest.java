@@ -19,8 +19,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
@@ -31,7 +30,6 @@ import com.hys.common.utils.Loggers;
 public class ExcelWriterTest {
 
     @Test
-    @Ignore
     public void t1() throws IOException, InterruptedException {
         Workbook[] wbs = new Workbook[] {
             new HSSFWorkbook(), new XSSFWorkbook()

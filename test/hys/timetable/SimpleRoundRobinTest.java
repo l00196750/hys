@@ -2,8 +2,8 @@ package hys.timetable;
 
 import hys.BaseSpringTest;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.Test;
 
 import com.hys.common.utils.Loggers;
 import com.hys.timetable.domain.SimpleRoundRobinV5;

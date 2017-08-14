@@ -1,6 +1,6 @@
 package hys.timetable;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.hys.common.utils.Loggers;
 

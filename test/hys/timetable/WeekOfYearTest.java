@@ -8,8 +8,8 @@ import java.time.temporal.WeekFields;
 import java.util.Locale;
 import java.util.TreeMap;
 
-import org.junit.Test;
 import org.slf4j.Logger;
+import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
 

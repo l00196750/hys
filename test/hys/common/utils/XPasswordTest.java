@@ -1,7 +1,7 @@
 package hys.common.utils;
 
-import org.junit.Test;
 import org.slf4j.Logger;
+import org.testng.annotations.Test;
 
 import com.hys.common.utils.IdWorker;
 import com.hys.common.utils.Loggers;
