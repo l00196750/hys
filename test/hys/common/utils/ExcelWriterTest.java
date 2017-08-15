@@ -1,5 +1,10 @@
 package hys.common.utils;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import com.hys.common.utils.ExcelWriter;
+import com.hys.common.utils.Loggers;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -21,30 +26,15 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.Test;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-
-import com.hys.common.utils.ExcelWriter;
-import com.hys.common.utils.Loggers;
-
 public class ExcelWriterTest {
 
     @Test
     public void t1() throws IOException, InterruptedException {
-        Workbook[] wbs = new Workbook[] {
-            new HSSFWorkbook(), new XSSFWorkbook()
-        };
+        Workbook[] wbs = new Workbook[] {new HSSFWorkbook(), new XSSFWorkbook()};
         for (int i = 0; i < wbs.length; i++) {
             Workbook workbook = wbs[i];
-            // 得到一个POI的工具类
-            CreationHelper createHelper = workbook.getCreationHelper();
 
-            // 在Excel工作簿中建一工作表，其名为缺省值, 也可以指定Sheet名称
-            Sheet sheet = workbook.createSheet();
             // Sheet sheet = workbook.createSheet("SheetName");
-
-            // 用于格式化单元格的数据
-            DataFormat format = workbook.createDataFormat();
 
             // 设置字体
             Font font = workbook.createFont();
@@ -62,14 +52,23 @@ public class ExcelWriterTest {
             cellStyle.setWrapText(true);
 
             CellStyle cellStyle2 = workbook.createCellStyle();
+            // 用于格式化单元格的数据
+            DataFormat format = workbook.createDataFormat();
             cellStyle2.setDataFormat(format.getFormat("＃, ## 0.0"));
 
             CellStyle cellStyle3 = workbook.createCellStyle();
             cellStyle3.setDataFormat(format.getFormat("yyyy-MM-dd HH:mm:ss"));
 
+            // 在Excel工作簿中建一工作表，其名为缺省值, 也可以指定Sheet名称
+            Sheet sheet = workbook.createSheet();
+
             // 添加单元格注释
             // 创建Drawing对象,Drawing是所有注释的容器.
             Drawing drawing = sheet.createDrawingPatriarch();
+
+            // 得到一个POI的工具类
+            CreationHelper createHelper = workbook.getCreationHelper();
+
             // ClientAnchor是附属在WorkSheet上的一个对象， 其固定在一个单元格的左上角和右下角.
             ClientAnchor anchor = createHelper.createClientAnchor();
             // 设置注释位子
@@ -114,10 +113,10 @@ public class ExcelWriterTest {
 
             // 合并单元格
             sheet.addMergedRegion(new CellRangeAddress(1, // 第一行（0）
-                2, // last row（0-based）
-                1, // 第一列（基于0）
-                2 // 最后一列（基于0）
-                ));
+                    2, // last row（0-based）
+                    1, // 第一列（基于0）
+                    2 // 最后一列（基于0）
+            ));
 
             // 保存
             String filename = "D:/workbook.xls";

@@ -1,12 +1,12 @@
 package hys.timetable;
 
+import com.hys.common.utils.Loggers;
+import com.hys.timetable.domain.RandomRoundRobin;
+
 import hys.BaseSpringTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
-
-import com.hys.common.utils.Loggers;
-import com.hys.timetable.domain.RandomRoundRobin;
 
 public class RandomRoundRobinTest extends BaseSpringTest {
 
@@ -37,7 +37,8 @@ public class RandomRoundRobinTest extends BaseSpringTest {
     //
     // @Test
     // public void listCourseTeacher() {
-    // List<Map<String, String>> listCourseTeacher = courseTeacherMapper.listCourseTeacher("r201701");
+    // List<Map<String, String>> listCourseTeacher =
+    // courseTeacherMapper.listCourseTeacher("r201701");
     // for (Map<String, String> map : listCourseTeacher) {
     // Loggers.log.debug("{}", map);
     // }

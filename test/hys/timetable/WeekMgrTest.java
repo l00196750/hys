@@ -1,5 +1,9 @@
 package hys.timetable;
 
+import com.hys.common.utils.Loggers;
+import com.hys.timetable.domain.WeekMgr;
+import com.hys.timetable.model.Week;
+
 import hys.BaseSpringTest;
 
 import java.util.Optional;
@@ -8,10 +12,6 @@ import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
-
-import com.hys.common.utils.Loggers;
-import com.hys.timetable.domain.WeekMgr;
-import com.hys.timetable.model.Week;
 
 public class WeekMgrTest extends BaseSpringTest {
 

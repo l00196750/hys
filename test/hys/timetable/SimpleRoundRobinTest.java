@@ -1,12 +1,12 @@
 package hys.timetable;
 
+import com.hys.common.utils.Loggers;
+import com.hys.timetable.domain.SimpleRoundRobinV5;
+
 import hys.BaseSpringTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
-
-import com.hys.common.utils.Loggers;
-import com.hys.timetable.domain.SimpleRoundRobinV5;
 
 public class SimpleRoundRobinTest extends BaseSpringTest {
 

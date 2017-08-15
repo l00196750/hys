@@ -1,5 +1,8 @@
 package hys.timetable;
 
+import com.google.common.collect.Maps;
+import com.hys.timetable.dao.LectureMapper;
+
 import hys.BaseSpringTest;
 
 import java.util.Map;
@@ -7,10 +10,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
-
-import com.google.common.collect.Maps;
-
-import com.hys.timetable.dao.LectureMapper;
 
 public class LectureMapperTest extends BaseSpringTest {
 

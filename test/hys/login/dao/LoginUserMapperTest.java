@@ -1,15 +1,14 @@
 package hys.login.dao;
 
+import com.google.common.base.Preconditions;
+import com.hys.common.utils.Loggers;
+import com.hys.login.dao.LoginUserMapper;
+import com.hys.login.model.LoginUserDetails;
+
 import hys.BaseSpringTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
-
-import com.google.common.base.Preconditions;
-
-import com.hys.common.utils.Loggers;
-import com.hys.login.dao.LoginUserMapper;
-import com.hys.login.model.LoginUserDetails;
 
 public class LoginUserMapperTest extends BaseSpringTest {
 
