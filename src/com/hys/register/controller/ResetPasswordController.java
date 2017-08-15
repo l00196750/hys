@@ -36,4 +36,5 @@ public class ResetPasswordController implements BaseApi {
         apiNormalResponse.setOperateSuccess(true);
         return apiNormalResponse;
     }
+
 }
