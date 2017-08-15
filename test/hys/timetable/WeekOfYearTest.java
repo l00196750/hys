@@ -6,19 +6,17 @@ import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.Locale;
-import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
-
 import com.hys.common.utils.Loggers;
-import com.hys.timetable.model.Week;
 
 public class WeekOfYearTest {
     Logger logger = Loggers.getLogger(WeekOfYearTest.class);
 
+    
     @Test
     public void t1() {
         LocalDate localDate = LocalDate.parse("2017-08-03");
@@ -33,7 +31,6 @@ public class WeekOfYearTest {
         TemporalField fieldISO = WeekFields.of(Locale.CHINESE).dayOfWeek();
         logger.debug("{}", localDate.with(fieldISO, DayOfWeek.MONDAY.getValue()));
 
-        TreeMap<String, Week> xx;
         Lists.newLinkedList();
     }
 }
