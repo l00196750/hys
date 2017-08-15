@@ -1,8 +1,8 @@
 package com.hys.timetable.model;
 
-import java.util.Objects;
-
 import com.google.common.base.MoreObjects;
+
+import java.util.Objects;
 
 public class CourseTeacher {
     private String id;
@@ -15,19 +15,23 @@ public class CourseTeacher {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         CourseTeacher other = (CourseTeacher) obj;
         if (id == null) {
-            if (other.id != null)
+            if (other.id != null) {
                 return false;
-        }
-        else if (!id.equals(other.id))
+            }
+        } else if (!id.equals(other.id)) {
             return false;
+        }
         return true;
     }
 
@@ -70,7 +74,8 @@ public class CourseTeacher {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("id", id).add("course", course).add("teacher", teacher).add("amount", amount).toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("course", course).add("teacher", teacher)
+                .add("amount", amount).toString();
     }
 
 }

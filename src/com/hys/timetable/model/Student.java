@@ -9,7 +9,7 @@ public class Student {
     private String userName;
 
     /**
-     * 初始科目
+     * 初始科目.
      */
     private String courseTeacherId;
 
@@ -39,7 +39,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("userCode", userCode).add("userName", userName).add("courseTeacherId", courseTeacherId)
-            .toString();
+        return MoreObjects.toStringHelper(this).add("userCode", userCode).add("userName", userName)
+                .add("courseTeacherId", courseTeacherId).toString();
     }
 }

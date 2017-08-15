@@ -1,5 +1,21 @@
 package com.hys.timetable.domain;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+import com.google.common.collect.Table.Cell;
+import com.hys.timetable.model.Course;
+import com.hys.timetable.model.CourseTeacher;
+import com.hys.timetable.model.Lecture;
+import com.hys.timetable.model.Period;
+import com.hys.timetable.model.Student;
+import com.hys.timetable.model.Teacher;
+import com.hys.timetable.model.Week;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -9,38 +25,21 @@ import java.util.TreeMap;
 
 import org.slf4j.Logger;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
-import com.google.common.collect.Table.Cell;
-
-import com.hys.timetable.model.Course;
-import com.hys.timetable.model.CourseTeacher;
-import com.hys.timetable.model.Lecture;
-import com.hys.timetable.model.Period;
-import com.hys.timetable.model.Student;
-import com.hys.timetable.model.Teacher;
-import com.hys.timetable.model.Week;
-
 public class RoundRobinContext {
 
     /**
-     * 招聘计划标识
+     * 招聘计划标识.
      */
     // TODO: grade
     private String recruitPlanCode;
 
     /**
-     * 培训开始周
+     * 培训开始周.
      */
     private long beginWeekOfYear;
 
     /**
-     * 培训结束周
+     * 培训结束周.
      */
     private long endWeekOfYear;
 
@@ -78,19 +77,22 @@ public class RoundRobinContext {
     private Table<String, String, CourseTeacher> courseTeacherTable;
 
     /**
-     * 课程表<br>
+     * 课程表. <br>
      * key=weekId <br>
      * 不要使用Table, 除非Lecture使用List存储
      */
     Multimap<Long, Lecture> lectureMultimap;
 
     /**
-     * 星期管理
+     * 星期管理.
      */
     private WeekMgr weekMgr;
 
     private Logger logger;
 
+    /**
+     * 初始化.
+     */
     public RoundRobinContext(Logger logger) {
         this.logger = logger;
 
@@ -105,21 +107,22 @@ public class RoundRobinContext {
     }
 
     /**
-     * 添加科目
+     * 添加科目.
      */
     public void addCourse(Course course) {
         this.courseMap.put(course.getCourseCode(), course);
     }
 
     /**
-     * 添加教科目的教员
+     * 添加教科目的教员.
      */
     public void addCourseTeacher(CourseTeacher courseTeacher) {
-        this.courseTeacherTable.put(courseTeacher.getCourse().getCourseCode(), courseTeacher.getTeacher().getUserCode(), courseTeacher);
+        this.courseTeacherTable.put(courseTeacher.getCourse().getCourseCode(), courseTeacher.getTeacher().getUserCode(),
+                courseTeacher);
     }
 
     /**
-     * 增加课程计划
+     * 增加课程计划.
      */
     public void addLecture(Lecture lecture) {
         // 严格检查，防止意外
@@ -134,30 +137,34 @@ public class RoundRobinContext {
         }
 
         // 学员已学过此科目
-        this.studyPlanTable.remove(lecture.getStudent().getUserCode(), lecture.getCourseTeacher().getCourse().getCourseCode());
+        this.studyPlanTable.remove(lecture.getStudent().getUserCode(),
+                lecture.getCourseTeacher().getCourse().getCourseCode());
     }
 
     /**
-     * 添加学员
+     * 添加学员.
      */
     public void addStudent(Student student) {
         this.studentMap.put(student.getUserCode(), student);
     }
 
     /**
-     * 增加学习计划
+     * 增加学习计划.
      */
     public void addStudyPlan(String studentUserCode, Course course) {
         this.studyPlanTable.put(studentUserCode, course.getCourseCode(), course.getCourseDuration());
     }
 
     /**
-     * 增加教员
+     * 增加教员.
      */
     public void addTeacher(Teacher teacher) {
         this.teacherMap.put(teacher.getUserCode(), teacher);
     }
 
+    /**
+     * 打印排课信息.
+     */
     public void dumpStudentLecture() {
         TreeMap<String, Lecture> lectureMap = new TreeMap<String, Lecture>();
         for (Lecture lecture : this.lectureMultimap.values()) {
@@ -167,12 +174,17 @@ public class RoundRobinContext {
         logger.debug("=================StudentLecture {}", lectureMap.size());
         logger.debug("{}, {}, {}, {}, {}", "Student", "Teacher", "CourseCode", "StartWeek", "EndWeek");
         for (Lecture lecture : lectureMap.values()) {
-            logger.debug("{}, {}, {}, {}, {}", lecture.getStudent().getUserName(), lecture.getCourseTeacher().getTeacher().getUserName(), lecture
-                .getCourseTeacher().getCourse().getCourseCode(), lecture.getPeriod().getStartWeek().getWeekOfYear(), lecture.getPeriod().getEndWeek()
-                .getWeekOfYear());
+            logger.debug("{}, {}, {}, {}, {}", lecture.getStudent().getUserName(),
+                    lecture.getCourseTeacher().getTeacher().getUserName(),
+                    lecture.getCourseTeacher().getCourse().getCourseCode(),
+                    lecture.getPeriod().getStartWeek().getWeekOfYear(),
+                    lecture.getPeriod().getEndWeek().getWeekOfYear());
         }
     }
 
+    /**
+     * 打印未排课的.
+     */
     public void dumpStudyPlanTable() {
         logger.debug("=================StudyPlan {}", this.studyPlanTable.size());
         logger.debug("{} {} {} {}", "userCode", "userName", "courseCode", "courseName");
@@ -181,32 +193,35 @@ public class RoundRobinContext {
             Cell<String, String, Integer> next = iterator.next();
             String studentUserCode = next.getRowKey();
             String courseCode = next.getColumnKey();
-            logger
-                .debug("{} {} {} {}", studentUserCode, getStudent(studentUserCode).getUserName(), courseCode, getCourse(courseCode).getCourseName());
+            logger.debug("{} {} {} {}", studentUserCode, getStudent(studentUserCode).getUserName(), courseCode,
+                    getCourse(courseCode).getCourseName());
         }
     }
 
     /**
-     * 查询所有的科目
+     * 查询所有的科目.
      */
     public Collection<Course> getAllCourse() {
         return this.courseMap.values();
     }
 
     /**
-     * 按科目查询未学习的学员
+     * 按科目查询未学习的学员.
      */
     public Set<String> getAllCourseStudent(String courseCode) {
         return this.studyPlanTable.column(courseCode).keySet();
     }
 
     /**
-     * 按科目查询所有教员
+     * 按科目查询所有教员.
      */
     public Collection<CourseTeacher> getAllCourseTeacher(String courseCode) {
         return this.courseTeacherTable.row(courseCode).values();
     }
 
+    /**
+     * .
+     */
     public Collection<Lecture> getAllLecture() {
         TreeMap<String, Lecture> lectureMap = new TreeMap<String, Lecture>();
         for (Lecture lecture : this.lectureMultimap.values()) {
@@ -216,21 +231,21 @@ public class RoundRobinContext {
     }
 
     /**
-     * 查询所有的学员
+     * 查询所有的学员.
      */
     public Collection<Student> getAllStudent() {
         return this.studentMap.values();
     }
 
     /**
-     * 培训开始周
+     * 培训开始周.
      */
     public long getBeginWeekOfYear() {
         return beginWeekOfYear;
     }
 
     /**
-     * 查询科目的具体信息
+     * 查询科目的具体信息.
      */
     public Course getCourse(String courseCode) {
         return this.courseMap.get(courseCode);
@@ -241,12 +256,15 @@ public class RoundRobinContext {
     }
 
     /**
-     * 培训结束周
+     * 培训结束周.
      */
     public long getEndWeekOfYear() {
         return endWeekOfYear;
     }
 
+    /**
+     * 学生未学习的课程.
+     */
     public Collection<CourseTeacher> getIdleCourseTeacher(long weekId) {
         Set<CourseTeacher> courseTeachers = Sets.newHashSet(this.courseTeacherTable.values());
         for (Lecture lecture : this.lectureMultimap.get(weekId)) {
@@ -255,6 +273,9 @@ public class RoundRobinContext {
         return courseTeachers;
     }
 
+    /**
+     * .
+     */
     public Collection<String> getIdleStudents(long weekId) {
         Set<String> studentCodeSet = Sets.newHashSet(this.studentMap.keySet());
         for (Lecture lecture : this.lectureMultimap.get(weekId)) {
@@ -263,6 +284,9 @@ public class RoundRobinContext {
         return studentCodeSet;
     }
 
+    /**
+     * .
+     */
     public Optional<Period> getPeriod(long weekId, int courseDuration) {
         Period period = null;
         Optional<Week> beginWeek = weekMgr.getWeek(weekId);
@@ -275,21 +299,21 @@ public class RoundRobinContext {
     }
 
     /**
-     * 招聘计划
+     * 招聘计划.
      */
     public String getRecruitPlanCode() {
         return recruitPlanCode;
     }
 
     /**
-     * 查询学员
+     * 查询学员.
      */
     public Student getStudent(String studentUserCode) {
         return this.studentMap.get(studentUserCode);
     }
 
     /**
-     * 查询教员
+     * 查询教员.
      */
     public Teacher getTeacher(String teacherUserCode) {
         return this.teacherMap.get(teacherUserCode);
@@ -299,6 +323,9 @@ public class RoundRobinContext {
         return weekMgr;
     }
 
+    /**
+     * 学员是否空闲.
+     */
     public boolean isStudentIdle(String studentUserCode, Period period) {
         for (Long w : period.getWeekIdSet()) {
             Collection<Lecture> lectures = this.lectureMultimap.get(w);
@@ -313,7 +340,7 @@ public class RoundRobinContext {
     }
 
     /**
-     * 课程人员数是是否超过最大值 <br>
+     * 课程人员数是是否超过最大值. <br>
      * true-超过最大值，false-未超过最大值
      */
     public boolean isTooManyStudent(String courseTeacherId, Period period, int maxStudentCount) {
@@ -334,6 +361,9 @@ public class RoundRobinContext {
         return false;
     }
 
+    /**
+     * .
+     */
     public float getAvgAmountEveryDay(String courseTeacherId, Period period) {
         Set<Long> weekIdSet = period.getWeekIdSet();
         Preconditions.checkArgument(!weekIdSet.isEmpty(), "weekIdSet.isEmpty()");

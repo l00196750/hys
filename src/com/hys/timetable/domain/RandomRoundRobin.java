@@ -17,7 +17,8 @@ public class RandomRoundRobin extends AbstractRoundRobin {
         // continue;
         // }
         //
-        // Collection<Lecture> collection = context.getTeachingMap().get(studing.getCourse().getCourseCode());
+        // Collection<Lecture> collection =
+        // context.getTeachingMap().get(studing.getCourse().getCourseCode());
         // if (collection.isEmpty()) {
         // logger.debug("not found teaching {}", studing);
         // }
@@ -49,7 +50,8 @@ public class RandomRoundRobin extends AbstractRoundRobin {
         // // 添加新的教学计划
         // Optional<Lecture> newTeaching = TeachingBuilder.newTeaching(teaching, weekMgr);
         // if (newTeaching.isPresent()) {
-        // context.getTeachingMap().put(newTeaching.get().getCourse().getCourseCode(), newTeaching.get());
+        // context.getTeachingMap().put(newTeaching.get().getCourse().getCourseCode(),
+        // newTeaching.get());
         // }
         // }
         //

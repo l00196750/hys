@@ -36,8 +36,8 @@ public class Course {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("courseCode", courseCode).add("courseName", courseName).add("courseDuration", courseDuration)
-            .toString();
+        return MoreObjects.toStringHelper(this).add("courseCode", courseCode).add("courseName", courseName)
+                .add("courseDuration", courseDuration).toString();
     }
 
 }

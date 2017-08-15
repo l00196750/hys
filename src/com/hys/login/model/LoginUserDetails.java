@@ -1,13 +1,13 @@
 package com.hys.login.model;
 
+import com.google.common.base.MoreObjects;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.google.common.base.MoreObjects;
 
 public class LoginUserDetails implements UserDetails {
 
@@ -97,7 +97,7 @@ public class LoginUserDetails implements UserDetails {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("userCode", userCode).add("userName", userName).add("password", password).add("enabled", enabled)
-            .toString();
+        return MoreObjects.toStringHelper(this).add("userCode", userCode).add("userName", userName)
+                .add("password", password).add("enabled", enabled).toString();
     }
 }

@@ -1,9 +1,9 @@
 package com.hys.timetable.domain;
 
+import com.hys.common.utils.Loggers;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.hys.common.utils.Loggers;
 
 public abstract class AbstractRoundRobin {
 
@@ -14,14 +14,17 @@ public abstract class AbstractRoundRobin {
     @Autowired
     private ContextDataImporter contextDataImporter;
 
-    @Autowired
-    private LectureExporter lectureExporter;
+    // @Autowired
+    // private LectureExporter lectureExporter;
 
     @Autowired
     private CountPlanner countPlanner;
 
     public abstract void round();
 
+    /**
+     * 初始化.
+     */
     public void init(String recruitPlanCode, long beginWeekOfYear, long endWeekOfYear) {
         context = new RoundRobinContext(logger);
         context.setBeginWeekOfYear(beginWeekOfYear);

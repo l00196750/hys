@@ -1,10 +1,10 @@
 package com.hys.demo.controller;
 
+import com.hys.common.api.base.BaseException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.hys.common.api.base.BaseException;
 
 @Controller
 @RequestMapping("/auth/demo")

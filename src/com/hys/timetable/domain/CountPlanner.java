@@ -1,21 +1,23 @@
 package com.hys.timetable.domain;
 
-import java.util.Collection;
-
-import org.springframework.stereotype.Component;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.primitives.Floats;
-
 import com.hys.timetable.model.Amount;
 import com.hys.timetable.model.Course;
 import com.hys.timetable.model.CourseTeacher;
 
+import java.util.Collection;
+
+import org.springframework.stereotype.Component;
+
 @Component
 public class CountPlanner {
 
+    /**
+     * 计算教员每期人数.
+     */
     public void split(RoundRobinContext context) {
         // 总的星期数
         int totalWeekCount = context.getWeekMgr().getAllWeekId().size();
@@ -28,7 +30,8 @@ public class CountPlanner {
             int totalStudentCount = context.getAllCourseStudent(course.getCourseCode()).size();
 
             Collection<CourseTeacher> courseTeachers = context.getAllCourseTeacher(course.getCourseCode());
-            Preconditions.checkArgument(!courseTeachers.isEmpty(), "CourseTeacher is empty. courseCode=" + course.getCourseCode());
+            Preconditions.checkArgument(!courseTeachers.isEmpty(),
+                    "CourseTeacher is empty. courseCode=" + course.getCourseCode());
 
             // 每个教员所带学员数量
             Multiset<Integer> studentCount4TearchMultiset = splitNumber(totalStudentCount, courseTeachers.size());
@@ -52,6 +55,9 @@ public class CountPlanner {
         }
     }
 
+    /**
+     * 拆分数字.
+     */
     public Multiset<Integer> splitNumber(int totalAmount, int splitCount) {
         Preconditions.checkArgument(totalAmount > 0, "totalAmount > 0");
         Preconditions.checkArgument(splitCount > 0, "splitCount > 0");

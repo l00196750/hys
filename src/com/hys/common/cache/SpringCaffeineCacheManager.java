@@ -1,5 +1,8 @@
 package com.hys.common.cache;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.google.common.collect.Maps;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,14 +14,13 @@ import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.benmanes.caffeine.cache.Caffeine;
-
-import com.google.common.collect.Maps;
-
 @Configuration
 @EnableCaching
 public class SpringCaffeineCacheManager {
 
+    /**
+     * 创建Caffeine缓存.
+     */
     public Map<String, Caffeine<Object, Object>> createCaffeineCache() {
         Map<String, Caffeine<Object, Object>> cacheConfig = Maps.newLinkedHashMap();
 
@@ -28,7 +30,10 @@ public class SpringCaffeineCacheManager {
 
     // @Bean
     // @Primary
-    // 需要使用再打开
+    //
+    /**
+     * 需要使用再打开.
+     */
     public CacheManager caffeineCacheManager() {
         Map<String, Caffeine<Object, Object>> cacheConfig = createCaffeineCache();
 

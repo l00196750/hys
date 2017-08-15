@@ -2,11 +2,13 @@ package com.hys.timetable.model;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
-
 import com.hys.common.utils.IdWorker;
 
 // 具体的一次课
 public class Lecture {
+    /**
+     * .
+     */
     public static Lecture create(CourseTeacher courseTeacher, Student student, Period period) {
         Lecture lecture = new Lecture();
         lecture.lectureId = IdWorker.nextIdStr();
@@ -60,16 +62,19 @@ public class Lecture {
         this.student = student;
     }
 
+    /**
+     * .
+     */
     public String toShortString() {
         return MoreObjects.toStringHelper(this).addValue(lectureId).addValue(student.getUserName())
-            .addValue(courseTeacher.getTeacher().getUserName()).addValue(period.getStartWeek().getWeekOfYear())
-            .addValue(period.getEndWeek().getWeekOfYear()).toString();
+                .addValue(courseTeacher.getTeacher().getUserName()).addValue(period.getStartWeek().getWeekOfYear())
+                .addValue(period.getEndWeek().getWeekOfYear()).toString();
     }
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("lectureId", lectureId).add("courseTeacher", courseTeacher).add("period", period)
-            .add("student", student).add("started", started).toString();
+        return MoreObjects.toStringHelper(this).add("lectureId", lectureId).add("courseTeacher", courseTeacher)
+                .add("period", period).add("student", student).add("started", started).toString();
     }
 
     public String getLectureId() {

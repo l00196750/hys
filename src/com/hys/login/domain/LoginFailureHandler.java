@@ -1,5 +1,9 @@
 package com.hys.login.domain;
 
+import com.hys.common.utils.HttpServletResponses;
+import com.hys.common.utils.Loggers;
+import com.hys.login.model.LoginResponse;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,17 +14,13 @@ import org.slf4j.Logger;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-import com.hys.common.utils.HttpServletResponses;
-import com.hys.common.utils.Loggers;
-import com.hys.login.model.LoginResponse;
-
 public class LoginFailureHandler implements AuthenticationFailureHandler {
 
     private Logger logger = Loggers.getLogger(LoginFailureHandler.class);
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
-        throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
         logger.debug("{} {} ", exception.getClass().getSimpleName(), exception.getMessage());
 
         LoginResponse loginResponse = new LoginResponse();

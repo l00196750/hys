@@ -1,13 +1,6 @@
 package com.hys.timetable.domain;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.google.common.base.Preconditions;
-
 import com.hys.timetable.dao.CourseMapper;
 import com.hys.timetable.dao.CourseTeacherMapper;
 import com.hys.timetable.dao.StudentMapper;
@@ -15,6 +8,12 @@ import com.hys.timetable.model.Course;
 import com.hys.timetable.model.CourseTeacher;
 import com.hys.timetable.model.Student;
 import com.hys.timetable.model.Teacher;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ContextDataImporter {
@@ -31,6 +30,9 @@ public class ContextDataImporter {
     @Autowired
     private CourseTeacherMapper courseTeacherMapper;
 
+    /**
+     * 初始化.
+     */
     public void initData(RoundRobinContext context) {
         context.setWeekMgr(weekMgr);
 
@@ -67,7 +69,8 @@ public class ContextDataImporter {
     }
 
     private void initTeachingMap(RoundRobinContext context) {
-        List<Map<String, String>> courseTeacherList = courseTeacherMapper.listCourseTeacher(context.getRecruitPlanCode());
+        List<Map<String, String>> courseTeacherList =
+                courseTeacherMapper.listCourseTeacher(context.getRecruitPlanCode());
         for (Map<String, String> record : courseTeacherList) {
             String courseCode = record.get("COURSE_CODE");
 

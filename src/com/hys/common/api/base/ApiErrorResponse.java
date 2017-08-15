@@ -1,10 +1,10 @@
 package com.hys.common.api.base;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class ApiErrorResponse extends ApiBaseResponse {
 
@@ -12,6 +12,9 @@ public class ApiErrorResponse extends ApiBaseResponse {
 
     private List<String> stackTrace;
 
+    /**
+     * .
+     */
     public ApiErrorResponse(String errorCode, String errorMessage) {
         this.setOperateSuccess(false);
         this.setErrorCode(errorCode);
@@ -20,6 +23,7 @@ public class ApiErrorResponse extends ApiBaseResponse {
         serverTime = LocalDateTime.now().toString();
     }
 
+    @SuppressWarnings("unused")
     private ApiErrorResponse() {
 
     }
@@ -38,8 +42,8 @@ public class ApiErrorResponse extends ApiBaseResponse {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("errorCode", getErrorCode()).add("errorMessage", getErrorMessage()).add("serverTime", serverTime)
-            .add("stackTrace", stackTrace).toString();
+        return MoreObjects.toStringHelper(this).add("errorCode", getErrorCode()).add("errorMessage", getErrorMessage())
+                .add("serverTime", serverTime).add("stackTrace", stackTrace).toString();
     }
 
 }

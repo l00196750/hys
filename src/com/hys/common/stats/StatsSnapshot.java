@@ -66,7 +66,8 @@ public class StatsSnapshot {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("snapshotTime", snapshotTime).add("topic", topic).add("successCount", successCount)
-            .add("successTime", successTime).add("failCount", failCount).add("failTime", failTime).toString();
+        return MoreObjects.toStringHelper(this).add("snapshotTime", snapshotTime).add("topic", topic)
+                .add("successCount", successCount).add("successTime", successTime).add("failCount", failCount)
+                .add("failTime", failTime).toString();
     }
 }

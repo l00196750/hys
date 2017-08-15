@@ -1,14 +1,14 @@
 package com.hys.login.service;
 
+import com.hys.common.utils.Loggers;
+import com.hys.login.dao.LoginUserMapper;
+import com.hys.login.model.LoginUserDetails;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import com.hys.common.utils.Loggers;
-import com.hys.login.dao.LoginUserMapper;
-import com.hys.login.model.LoginUserDetails;
 
 @Service
 public class UserDetailService {
@@ -17,6 +17,9 @@ public class UserDetailService {
     @Autowired
     private LoginUserMapper loginUserMapper;
 
+    /**
+     * 按userCode取用户信息.
+     */
     @Cacheable(value = "loginUserDetailsCache", sync = true)
     public UserDetails loadUserByUsername(String userCode) {
         logger.debug("loadUserByUsername {}", userCode);

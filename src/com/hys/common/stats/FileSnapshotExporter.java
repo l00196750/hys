@@ -1,13 +1,12 @@
 package com.hys.common.stats;
 
-import java.io.IOException;
-import java.util.Collection;
-
 import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
-
 import com.hys.common.utils.Loggers;
+
+import java.io.IOException;
+import java.util.Collection;
 
 public class FileSnapshotExporter implements SnapshotExporter {
 
@@ -21,8 +20,7 @@ public class FileSnapshotExporter implements SnapshotExporter {
     public void export(Collection<StatsSnapshot> snapshots) {
         try {
             appendToFile(snapshots);
-        }
-        catch (Throwable e) {
+        } catch (Throwable e) {
             Loggers.getLogger(FileSnapshotExporter.class).error("{}", e);
         }
     }

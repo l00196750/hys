@@ -1,16 +1,16 @@
 package com.hys.common.stats;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.google.common.util.concurrent.AtomicLongMap;
+import com.google.common.util.concurrent.Uninterruptibles;
+
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.util.concurrent.AtomicLongMap;
-import com.google.common.util.concurrent.Uninterruptibles;
 
 public final class StatsCounter extends Thread {
 
@@ -35,7 +35,11 @@ public final class StatsCounter extends Thread {
 
     }
 
-    public static StatsCounter createStarted(String statsCounterName, List<? extends SnapshotExporter> snapshotExporterList) {
+    /**
+     * .
+     */
+    public static StatsCounter createStarted(String statsCounterName,
+            List<? extends SnapshotExporter> snapshotExporterList) {
         StatsCounter statsCounter = new StatsCounter();
 
         statsCounter.setName(statsCounterName + "Thread");
@@ -48,12 +52,18 @@ public final class StatsCounter extends Thread {
         return statsCounter;
     }
 
+    /**
+     * .
+     */
     public void recordSuccess(String topic, long executeTime) {
         AtomicStats atomicStats = atomicReference.get();
         atomicStats.successCount.incrementAndGet(topic);
         atomicStats.successTime.getAndAdd(topic, executeTime);
     }
 
+    /**
+     * .
+     */
     public void recordFail(String topic, long executeTime) {
         AtomicStats atomicStats = atomicReference.get();
         atomicStats.failCount.incrementAndGet(topic);

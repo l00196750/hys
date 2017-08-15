@@ -24,6 +24,7 @@ public class ApiBaseResponse {
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }
+    
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
@@ -35,7 +36,7 @@ public class ApiBaseResponse {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("operateSuccess", operateSuccess).add("errorCode", errorCode).add("errorMessage", errorMessage)
-            .toString();
+        return MoreObjects.toStringHelper(this).add("operateSuccess", operateSuccess).add("errorCode", errorCode)
+                .add("errorMessage", errorMessage).toString();
     }
 }

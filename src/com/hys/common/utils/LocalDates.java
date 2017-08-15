@@ -1,11 +1,14 @@
 package com.hys.common.utils;
 
-import java.time.LocalDate;
-
 import com.google.common.base.Strings;
+
+import java.time.LocalDate;
 
 public class LocalDates {
 
+    /**
+     * 获取当前时间 yyyymmdd.
+     */
     public static String now(String separator) {
         separator = Strings.nullToEmpty(separator);
         LocalDate now = LocalDate.now();
@@ -18,12 +21,10 @@ public class LocalDates {
         if (absYear < 1000) {
             if (yearValue < 0) {
                 buf.append(yearValue - 10000).deleteCharAt(1);
-            }
-            else {
+            } else {
                 buf.append(yearValue + 10000).deleteCharAt(0);
             }
-        }
-        else {
+        } else {
             if (yearValue > 9999) {
                 buf.append('+');
             }

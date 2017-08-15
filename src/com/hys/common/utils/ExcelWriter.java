@@ -1,5 +1,7 @@
 package com.hys.common.utils;
 
+import com.google.common.collect.Table;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,10 +20,11 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.google.common.collect.Table;
-
 public class ExcelWriter {
 
+    /**
+     * 写excel文件.
+     */
     public String writer(Table<Integer, Integer, String> table) throws IOException {
         Workbook workbook = new XSSFWorkbook();
 

@@ -1,5 +1,10 @@
 package com.hys.login.domain;
 
+import com.google.common.base.Strings;
+import com.google.common.base.Throwables;
+import com.hys.common.utils.Loggers;
+import com.hys.login.service.UserDetailService;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -9,11 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import com.google.common.base.Strings;
-
-import com.hys.common.utils.Loggers;
-import com.hys.login.service.UserDetailService;
 
 public class SecurityProvider implements AuthenticationProvider {
 
@@ -26,6 +26,7 @@ public class SecurityProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
 
+        logger.debug(Throwables.getStackTraceAsString(new Throwable()));
         String inputUserCode = token.getName();
         String inputPassword = Strings.nullToEmpty(token.getCredentials().toString());
         logger.debug("authenticate usercode {} pwd {}", inputUserCode, inputPassword);
@@ -43,7 +44,8 @@ public class SecurityProvider implements AuthenticationProvider {
             throw new BadCredentialsException("username: " + inputUserCode);
         }
 
-        return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
+                userDetails.getAuthorities());
     }
 
     @Override

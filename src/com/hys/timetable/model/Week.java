@@ -35,6 +35,7 @@ public class Week {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("weekOfYear", weekOfYear).add("beginDate", beginDate).add("endDate", endDate).toString();
+        return MoreObjects.toStringHelper(this).add("weekOfYear", weekOfYear).add("beginDate", beginDate)
+                .add("endDate", endDate).toString();
     }
 }

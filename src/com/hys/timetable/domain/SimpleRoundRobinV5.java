@@ -1,5 +1,15 @@
 package com.hys.timetable.domain;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.hys.timetable.model.Course;
+import com.hys.timetable.model.CourseTeacher;
+import com.hys.timetable.model.Lecture;
+import com.hys.timetable.model.Period;
+import com.hys.timetable.model.Student;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -7,17 +17,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
-
-import com.google.common.base.Preconditions;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-
-import com.hys.timetable.model.Course;
-import com.hys.timetable.model.CourseTeacher;
-import com.hys.timetable.model.Lecture;
-import com.hys.timetable.model.Period;
-import com.hys.timetable.model.Student;
 
 @Component
 public class SimpleRoundRobinV5 extends AbstractRoundRobin {
@@ -77,7 +76,7 @@ public class SimpleRoundRobinV5 extends AbstractRoundRobin {
     }
 
     /**
-     * true:分派成功, false:分派失败
+     * true:分派成功, false:分派失败.
      */
     private boolean assignStudentToCourseTeacher(Student student, CourseTeacher courseTeacher, Long weekId) {
         Course course = courseTeacher.getCourse();
@@ -104,7 +103,8 @@ public class SimpleRoundRobinV5 extends AbstractRoundRobin {
         }
 
         // 周期内是否会超过最大学员数
-        if (context.isTooManyStudent(courseTeacher.getId(), period.get(), courseTeacher.getAmount().getMaxAmountIfExist())) {
+        if (context.isTooManyStudent(courseTeacher.getId(), period.get(),
+                courseTeacher.getAmount().getMaxAmountIfExist())) {
             return false;
         }
 
@@ -122,8 +122,8 @@ public class SimpleRoundRobinV5 extends AbstractRoundRobin {
 
         for (Course course : context.getAllCourse()) {
             Optional<Period> period = context.getPeriod(context.getBeginWeekOfYear(), course.getCourseDuration());
-            Preconditions.checkArgument(period.isPresent(),
-                "period.isPresent() week:" + context.getBeginWeekOfYear() + ",duration " + course.getCourseDuration());
+            Preconditions.checkArgument(period.isPresent(), "period.isPresent() week:" + context.getBeginWeekOfYear()
+                    + ",duration " + course.getCourseDuration());
 
             Collection<CourseTeacher> courseTeachers = context.getAllCourseTeacher(course.getCourseCode());
             for (CourseTeacher courseTeacher : courseTeachers) {

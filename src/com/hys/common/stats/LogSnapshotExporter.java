@@ -1,10 +1,10 @@
 package com.hys.common.stats;
 
+import com.hys.common.utils.Loggers;
+
 import java.util.Collection;
 
 import org.slf4j.Logger;
-
-import com.hys.common.utils.Loggers;
 
 public class LogSnapshotExporter implements SnapshotExporter {
 

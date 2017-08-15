@@ -1,23 +1,24 @@
 package com.hys.timetable.domain;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
-
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
-
 import com.hys.common.utils.ExcelWriter;
 import com.hys.common.utils.Loggers;
 import com.hys.timetable.model.CourseTeacher;
 import com.hys.timetable.model.Lecture;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
+
 public class LectureExcelExporter {
 
+    /**
+     * 保存到数据库.
+     */
     public void save(RoundRobinContext context) {
         Table<Integer, Integer, String> excelTable = HashBasedTable.create();
-        Collection<Lecture> lectures = context.getAllLecture();
 
         int column = 2;
         Map<Long, Integer> weekId2ColumnMap = Maps.newHashMap();
@@ -32,6 +33,7 @@ public class LectureExcelExporter {
 
         Table<String, String, Integer> courseTeacher2RownumTable = HashBasedTable.create();
 
+        Collection<Lecture> lectures = context.getAllLecture();
         for (Lecture lecture : lectures) {
             int rownum = 0;
 
@@ -63,8 +65,7 @@ public class LectureExcelExporter {
         try {
             String fileName = new ExcelWriter().writer(excelTable);
             Loggers.log.debug(fileName);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             Loggers.log.error("{}", e);
         }
     }

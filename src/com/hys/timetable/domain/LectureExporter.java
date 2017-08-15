@@ -1,5 +1,9 @@
 package com.hys.timetable.domain;
 
+import com.google.common.collect.Maps;
+import com.hys.timetable.dao.LectureMapper;
+import com.hys.timetable.model.Lecture;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -7,17 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Maps;
-
-import com.hys.timetable.dao.LectureMapper;
-import com.hys.timetable.model.Lecture;
-
 @Component
 public class LectureExporter {
 
     @Autowired
     private LectureMapper lectureMapper;
 
+    /**
+     * 保存数据库.
+     */
     @Transactional
     public void save(Collection<Lecture> lectures) {
         // TODO: 直接用Lecture，不使用hashmap
